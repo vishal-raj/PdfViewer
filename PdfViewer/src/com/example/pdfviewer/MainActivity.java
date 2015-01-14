@@ -5,20 +5,43 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.res.*;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.res.Configuration;
+import android.view.WindowManager;
+
 
 public class MainActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		//added by vishal
+		Configuration config = getResources().getConfiguration();
+
+	      FragmentManager fragmentManager = getFragmentManager();
+	      FragmentTransaction fragmentTransaction = 
+	      fragmentManager.beginTransaction();
+	      if (config.orientation == Configuration.ORIENTATION_LANDSCAPE)
+	      {
+	    	  LM_Fragement ls_fragment = new LM_Fragement();
+	          fragmentTransaction.replace(android.R.id.content, ls_fragment);
+	      }
+	      else
+	      {
+	    	  PM_Fragement pm_fragment = new PM_Fragement();
+	          fragmentTransaction.replace(android.R.id.content, pm_fragment);
+	      }
+		
+	      fragmentTransaction.commit();
 		Log.d("First","By Vishal");
 		Log.d("First","By Supriya");
 		Log.d("Second","By Vishal");
 		Log.d("Second","By Supriya");
 	}
 
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
