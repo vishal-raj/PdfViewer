@@ -17,27 +17,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Configuration config = getResources().getConfiguration();
-
-	      FragmentManager fragmentManager = getFragmentManager();
-	      FragmentTransaction fragmentTransaction = 
-	      fragmentManager.beginTransaction();
-	      if (config.orientation == Configuration.ORIENTATION_LANDSCAPE)
-	      {
-	    	  LM_Fragement ls_fragment = new LM_Fragement();
-	          fragmentTransaction.replace(android.R.id.content, ls_fragment);
-	      }
-	      else
-	      {
-	    	  PM_Fragement pm_fragment = new PM_Fragement();
-	          fragmentTransaction.replace(android.R.id.content, pm_fragment);
-	      }
 		
-	      fragmentTransaction.commit();
-		Log.d("First","By Vishal");
-		Log.d("First","By Supriya");
-		Log.d("Second","By Vishal");
-		Log.d("Second","By Supriya");
+		
 	}
 
 	
