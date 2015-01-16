@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 	EditText editUser;
 	EditText editPass;
 	Button loginButton;
-	TextView php_res;
+	//TextView php_res;
 	HttpPost httppost;
     StringBuffer buffer;
     HttpResponse response;
@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
 		editUser = (EditText)findViewById(R.id.editEmail);
 		editPass = (EditText)findViewById(R.id.editPass);
 		loginButton = (Button)findViewById(R.id.btnSingIn);
-		php_res =(TextView)findViewById(R.id.php_res) ;
+		//php_res =(TextView)findViewById(R.id.php_res) ;
 		loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
                         public void run() {
                             login();                          
                         }
-                      });                
+                      }).start();                
             }
         });
 		
@@ -73,12 +73,12 @@ public class MainActivity extends Activity {
         try{            
               
             httpclient=new DefaultHttpClient();
-            httppost= new HttpPost("http://10.0.3.2/pdfviewer/validate.php"); //  url of validate.php.
+            httppost= new HttpPost("http://10.0.3.2/pdfviewer/check.php"); //  url of validate.php.
             
             nameValuePairs = new ArrayList<NameValuePair>(2);
             // Always use the same variable name for posting i.e the android side variable name and php side variable name should be similar, 
-            nameValuePairs.add(new BasicNameValuePair("user_name",editUser.getText().toString().trim()));  // $Edittext_value = $_POST['Edittext_value'];
-            nameValuePairs.add(new BasicNameValuePair("user_pass",editPass.getText().toString().trim())); 
+            nameValuePairs.add(new BasicNameValuePair("username",editUser.getText().toString().trim()));  // $Edittext_value = $_POST['Edittext_value'];
+            nameValuePairs.add(new BasicNameValuePair("password",editPass.getText().toString().trim())); 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             //Execute HTTP Post Request
             response=httpclient.execute(httppost);
@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
             System.out.println("Response : " + response); 
             runOnUiThread(new Runnable() {
                 public void run() {
-                    php_res.setText("Response from PHP : " + response);
+                    //php_res.setText("Response from PHP : " + response);
                     dialog.dismiss();
                 }
             });
@@ -101,13 +101,14 @@ public class MainActivity extends Activity {
                 });
                  
                 startActivity(new Intent(MainActivity.this, PdfHome.class));
+                
             }else{
                 showAlert();                
             }
              
         }catch(Exception e){
             dialog.dismiss();
-            System.out.println("Exception : " + e.getMessage());
+            //System.out.println("Exception : " + e.getMessage());
         }
     }
     public void showAlert(){
