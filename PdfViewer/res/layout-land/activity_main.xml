@@ -24,6 +24,8 @@
               android:layout_height="wrap_content"
               android:background="@drawable/edittext_top_bg"
               android:padding="10dp"
+              android:paddingLeft="30dp"
+              android:paddingRight="30dp"
               android:hint="User name or email"
               android:textColorHint="#cccccc"
               android:drawableLeft="@drawable/user"/>
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="Forgot Password?" 
                 android:layout_marginTop="5dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:gravity="center"/>
             <TextView
                 android:id="@+id/needAccount"
@@ -66,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="Need an account?" 
                 android:layout_marginTop="5dp"
-                android:layout_weight="0.5"
+                android:layout_weight="1"
                 android:gravity="center"/>
     
 		</LinearLayout>

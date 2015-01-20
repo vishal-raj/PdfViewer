@@ -73,10 +73,10 @@ public class MainActivity extends Activity {
         try{            
               
             httpclient=new DefaultHttpClient();
-            httppost= new HttpPost("http://10.0.3.2/pdfviewer/check.php"); //  url of validate.php.
+            httppost= new HttpPost("http://10.0.3.2/pdfviewer/check.php"); //  url of check.php.
             
             nameValuePairs = new ArrayList<NameValuePair>(2);
-            // Always use the same variable name for posting i.e the android side variable name and php side variable name should be similar, 
+            // Sending POST data to PHP script to validate
             nameValuePairs.add(new BasicNameValuePair("username",editUser.getText().toString().trim()));  // $Edittext_value = $_POST['Edittext_value'];
             nameValuePairs.add(new BasicNameValuePair("password",editPass.getText().toString().trim())); 
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -111,6 +111,7 @@ public class MainActivity extends Activity {
             //System.out.println("Exception : " + e.getMessage());
         }
     }
+	//Show alert dialog if User not found
     public void showAlert(){
         MainActivity.this.runOnUiThread(new Runnable() {
             public void run() {
