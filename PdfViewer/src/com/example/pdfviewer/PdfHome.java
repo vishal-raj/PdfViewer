@@ -14,18 +14,6 @@ public class PdfHome extends Activity{
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.pdfhome);
 
-	    GridView gridview = (GridView) findViewById(R.id.gridpdfview);
-	    gridview.setAdapter(new ImageAdapter(this));
-
-	    gridview.setOnItemClickListener(new OnItemClickListener() {
-	        
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				Toast.makeText(PdfHome.this, "" + position, Toast.LENGTH_SHORT).show();
-			}
-	    });
+	    
 	}
 }
