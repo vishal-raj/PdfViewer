@@ -9,5 +9,13 @@
     </string>
     <string name="portrait_message">This is Portrait mode fragment
     </string>
+    <string name="user_name_or_email">User name or email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password_">Forgot Password?</string>
+    <string name="need_an_account_">Need an account?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="let_s_get_started_n_we_will_send_you_an_e_mail_on_how_to_change_your_password_">Let\'s get started !\n We will send you an e-mail on how to change your password.</string>
+    <string name="e_mail">E-mail</string>
 
 </resources>

@@ -6,9 +6,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" 
+    tools:context=".LoginActivity" 
 
-    android:background="#ffffff">
+    android:background="#E8E8E8">
 
     <LinearLayout 
         android:orientation="vertical"
@@ -18,33 +18,47 @@
         android:padding="10dp"
         >
 
-        <EditText 
-              android:id="@+id/editEmail"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@drawable/edittext_top_bg"
-              android:padding="10dp"
-              android:hint="User name or email"
-              android:textColorHint="#cccccc"
-              android:drawableLeft="@drawable/user"/>
-        <EditText 
-               android:id="@+id/editPass"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:background="@drawable/edittext_bottom_bg"
-               android:layout_marginTop="-2dp"
-               android:padding="10dp"
-               android:hint="Password"
-               android:textColorHint="#cccccc"
-               android:password="true"
-               android:drawableLeft="@drawable/password"/>
+        <TextView
+            android:id="@+id/UserNotFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/edittext_top_bg"
+            android:padding="10dp"
+            android:hint="@string/user_name_or_email"
+            android:textColorHint="#cccccc"
+            android:drawableLeft="@drawable/user" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/editPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:background="@drawable/edittext_bottom_bg"
+            android:drawableLeft="@drawable/password"
+            android:hint="@string/password"
+            android:padding="10dp"
+            android:password="true"
+            android:textColorHint="#cccccc"
+            tools:ignore="Deprecated" />
+
         <Button 
                android:id="@+id/btnSingIn"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:padding="10dp"
                android:layout_margin="4dp"
-               android:text="Sign In"
+               android:text="@string/sign_in"
                android:background="@drawable/button_default_bg"
            />
         
@@ -56,25 +70,25 @@
                 android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?" 
+                android:text="@string/forgot_password_" 
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:textStyle="italic"
                 android:clickable="true"
-                android:textColorLink="#0000FF"/>
+                android:textColor="#0000FF"/>
             <TextView
                 android:id="@+id/needAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Need an account?" 
+                android:text="@string/need_an_account_" 
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:textStyle="italic"
-                android:clickable="true"
-                android:textColorLink="#0000FF"/>
-            
+                android:clickable="true" 
+                android:textColor="#0000FF"/>
+                           
     
 		</LinearLayout>
             

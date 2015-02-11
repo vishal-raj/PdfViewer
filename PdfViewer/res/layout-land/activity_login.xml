@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" 
+    tools:context=".LoginActivity" 
 
     android:background="#ffffff">
 
@@ -26,7 +26,7 @@
               android:padding="10dp"
               android:paddingLeft="30dp"
               android:paddingRight="30dp"
-              android:hint="User name or email"
+              android:hint="@string/user_name_or_email"
               android:textColorHint="#cccccc"
               android:drawableLeft="@drawable/user"/>
         <EditText 
@@ -36,7 +36,7 @@
                android:background="@drawable/edittext_bottom_bg"
                android:layout_marginTop="-2dp"
                android:padding="10dp"
-               android:hint="Password"
+               android:hint="@string/password"
                android:textColorHint="#cccccc"
                android:password="true"
                android:drawableLeft="@drawable/password"/>
@@ -46,7 +46,7 @@
                android:layout_height="wrap_content"
                android:padding="10dp"
                android:layout_margin="4dp"
-               android:text="Sign In"
+               android:text="@string/sign_in"
                android:background="@drawable/button_default_bg"
            />
         
@@ -58,7 +58,7 @@
                 android:id="@+id/forgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Forgot Password?" 
+                android:text="@string/forgot_password_" 
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"/>
@@ -66,7 +66,7 @@
                 android:id="@+id/needAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Need an account?" 
+                android:text="@string/need_an_account_" 
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"/>

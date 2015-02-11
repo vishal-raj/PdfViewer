@@ -7,28 +7,33 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
-import android.util.Log;
+
+import android.net.Uri;
 
 public class PdfFromServer {
 	InputStream is;
-	HttpPost httppost=null;
+	HttpGet httpGet=null;
 	HttpClient httpclient;
 	HttpResponse response;
 	HttpEntity entity;
 	String result;
 	
-public void pdfList() {
+public String pdfList(String user_id, String token) {
 		
 		// TODO Auto-generated method stub
     	try {
-    		int timeout= 7000;
+    		int timeout= 30000;
     	    httpclient = new DefaultHttpClient();
     	    httpclient.getParams().setParameter(HttpConnectionParams.CONNECTION_TIMEOUT, timeout);
-    	    httppost = new HttpPost("http://10.0.3.2/pdfviewer/listPdf.php"); 
-    	    response = httpclient.execute(httppost);
+    	    //fetching list of pdf files that are stored on server
+    	    String url="http://identity.usgbc.org:80/Api/v1/Education/getPublications.json?email="+Uri.encode(user_id);
+    	    //Log.d("URL",url);
+    	    httpGet = new HttpGet(url); 
+    	    httpGet.addHeader("Authorization", "Basic "+token);
+    	    response = httpclient.execute(httpGet);
     	    entity = response.getEntity();
     	    is = entity.getContent();
     	}
@@ -47,16 +52,18 @@ public void pdfList() {
     	    }
 
     	    is.close();
-    	    result=sb.toString();   
+    	    result=sb.toString();  
+    	    //Log.d("book list",result);
     	}
     	catch(Exception e){
     	    e.printStackTrace();
     	}
-
-    	for (String getFile: result.split("-")){
-    	    Log.d("abc","String is:" + getFile);
-    	}
     	
+    	//for (String getFile: result.split("-")){
+    		//list of pdf files in logcat obtained from server
+    	 //   Log.d("abc","File :" + getFile);
+    	//}
+    	return result;
         
 	}
     
