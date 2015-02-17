@@ -27,7 +27,7 @@
         	android:textSize="12sp"
         	android:gravity="left"
         	android:textStyle="bold"
-        	android:text="Learn Java in 21 days"
+        	android:text=""
 		    android:background="@drawable/ondevice"	        
 		    />
 

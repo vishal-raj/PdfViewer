@@ -1,3 +1,7 @@
+/*
+ * Author Vishal Raj
+ * Intern@Groupten
+ */
 package com.example.pdfviewer;
 
 import java.util.ArrayList;
@@ -14,11 +18,11 @@ public class PdfDetailsSource {
 	
 	private SQLiteDatabase database;
 	private PdfDbHelper dbHelper;
-	private String[] allColumns = { PdfDbHelper.KEY_NAME,
+	private String[] allColumns = { PdfDbHelper.KEY_USER, PdfDbHelper.KEY_NAME,
 	      PdfDbHelper.KEY_FILE_KEY };
 
-	public PdfDetailsSource(String user_id, Context context) {
-	    dbHelper = new PdfDbHelper(user_id, context);
+	public PdfDetailsSource(Context context) {
+	    dbHelper = new PdfDbHelper(context);
 	}
 
 	public void open() throws SQLException {
@@ -29,8 +33,9 @@ public class PdfDetailsSource {
 	    dbHelper.close();
 	}
 
-	public void createDetails(String filename, String imageurl) {
+	public void createDetails(String user, String filename, String imageurl) {
 	    ContentValues values = new ContentValues();
+	    values.put(PdfDbHelper.KEY_USER, user);
 	    values.put(PdfDbHelper.KEY_NAME, filename);
 	    values.put(PdfDbHelper.KEY_FILE_KEY, imageurl);
 	    database.insert(PdfDbHelper.TABLE_PDFS, null,
@@ -39,10 +44,11 @@ public class PdfDetailsSource {
 	}
 
 
-	  public List<HashMap<String, String>> getPdfDetails() {
+	  public List<HashMap<String, String>> getPdfDetails(String user) {
 		  List<HashMap<String, String>> templist = new ArrayList<HashMap<String,String>>();
-		  Cursor cursor = database.query(PdfDbHelper.TABLE_PDFS,
-	    				allColumns, null, null, null, null, null);
+		  /*Cursor cursor = database.query(PdfDbHelper.TABLE_PDFS,
+	    				PdfDbHelper.KEY_NAME, PdfDbHelper.KEY_FILE_KEY, PdfDbHelper.KEY_NAME=user, null, null, null, null);*/
+		  Cursor cursor = database.rawQuery("SELECT pdfname, imagepath FROM pdfs WHERE userid='" + user +"'", null);
 		  cursor.moveToFirst();
 		  while (!cursor.isAfterLast()) {
 	      HashMap<String, String> hm = new HashMap<String,String>();

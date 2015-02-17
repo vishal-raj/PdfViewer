@@ -1,4 +1,4 @@
-/*
+/* 
  * Author Vishal Raj
  * Intern@Groupten
  */
@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+
 public class HomeActivity extends Activity{
 	
 	private String pdfname, filekey, pdflist, imageurl;
@@ -32,8 +33,6 @@ public class HomeActivity extends Activity{
 	private String user_id,token;
 	int pdf_icon = (int)(R.drawable.pdf_icon);
 	CustomGridview gridView;   
-	private View viewItem;
-	private View v1;
 	ImageAdapterCloud cloudadapter;
 	ImageAdapterDevice deviceadapter;
 	@Override
@@ -78,9 +77,9 @@ public class HomeActivity extends Activity{
 			List<HashMap<String, String>> aList;
 			// TODO Auto-generated method stub
 			String user = user_id.split("\\@")[0];
-			datasource = new PdfDetailsSource(user, getBaseContext());
+			datasource = new PdfDetailsSource(getBaseContext());
 		    datasource.open();
-			aList =  datasource.getPdfDetails();
+			aList =  datasource.getPdfDetails(user);
 			
 			System.out.println(aList.toString());
 			ArrayList<String> temp1 = new ArrayList<String>();
@@ -104,23 +103,6 @@ public class HomeActivity extends Activity{
 		@Override
 		protected void onPostExecute(final List<HashMap<String,String>> aList) {
 
-			//Converting List to array for Image adapter
-			/*System.out.println(aList.toString());
-			ArrayList<String> temp1 = new ArrayList<String>();
-			ArrayList<String> temp2 = new ArrayList<String>();
-			for (int i = 0; i < aList.size(); i++) {
-				temp1.add((String) aList.get(i).get("pdf_name"));
-				temp2.add((String) aList.get(i).get("pdf_icon"));
-				//Log.d("temp1",  temp1.toString());
-				//Log.d("temp2",  temp2.toString());
-			}
-			
-			//Converting List to Array for creating image adapter
-			String [] pname = temp1.toArray(new String[temp1.size()]);
-			String [] pimage = temp2.toArray(new String[temp2.size()]);
-
-			//Creating Custom gridview object using the above created Arrays
-			ImageAdapterDevice adapter = new ImageAdapterDevice(HomeActivity.this, pname, pimage);*/
 			gridView = (CustomGridview) findViewById(R.id.griddevice);
 
 			// Setting an adapter containing images to the gridview
@@ -191,22 +173,7 @@ public class HomeActivity extends Activity{
 		
 		@Override
 		   protected void onPostExecute(final List<HashMap<String,String>> aList) {
-			/*
-			//Converting List to array for Image adapter
-			ArrayList<String> temp1 = new ArrayList<String>();
-			ArrayList<String> temp2 = new ArrayList<String>();
-			for (int i = 0; i < aList.size(); i++) {
-			    temp1.add((String) aList.get(i).get("pdf_name"));
-			    temp2.add((String) aList.get(i).get("pdf_icon"));
-			    Log.d("temp1",  temp1.toString());
-			    Log.d("temp2",  temp2.toString());
-			}
-		
-			String [] pname = temp1.toArray(new String[temp1.size()]);
-			String [] pimage = temp2.toArray(new String[temp2.size()]);
 			
-			//Creating image adapter with pdfname and pdficon
-			ImageAdapterCloud adapter = new ImageAdapterCloud(HomeActivity.this, pname, pimage);
 	    	//Creating Custom gridview object*/
 			gridView = (CustomGridview) findViewById(R.id.gridcloud);
 	    
@@ -229,37 +196,9 @@ public class HomeActivity extends Activity{
         			//View viewItem = gridView.getChildAt(position);
         			dialog = ProgressDialog.show(HomeActivity.this, "", 
         	                "Downloading...", true);
+        			dialog.setCancelable(false);
         			DownloadPdfTask dtask = new DownloadPdfTask();
         			dtask.execute(new String[]{pdfname, filekey, imageurl});
-        			
-        			//To show the progress bar on click of grid item
-        			/*viewItem = gridView.getChildAt(position);
-        			
-        			if (viewItem != null) {                 
-        				
-        				final View v1 = viewItem.findViewById(R.id.circularprogressbar2);
-        				
-        				v1.setVisibility(View.VISIBLE);
-        				
-        				((CircularProgressBar) v1).animateProgressTo(0, 100, new ProgressAnimationListener() {
-            				
-            				@Override
-            				public void onAnimationStart() {				
-            				}
-            				
-            				@Override
-            				public void onAnimationProgress(int progress) {
-            					((CircularProgressBar) v1).setTitle(progress + "%");
-            				}
-            				
-            				@Override
-            				public void onAnimationFinish() {
-            					((CircularProgressBar) v1).setSubTitle("done");
-            				}
-            			});
- 
-        				//v1.setVisibility(View.GONE);
-        			}*/
         			
         		}
         	}); 
@@ -289,11 +228,12 @@ public class HomeActivity extends Activity{
 			String storePath = dirpath + "/pdf/"+params[0]+".pdf";
 			File pdfFile = new File(storePath);
 			
+			//if pdf file is downloaded successfully then creating a new row in User Table
 			if(pdfFile.exists()){
 				String user = user_id.split("\\@")[0];
-				datasource = new PdfDetailsSource(user, getBaseContext());
+				datasource = new PdfDetailsSource(getBaseContext());
 			    datasource.open();
-				datasource.createDetails(params[0], params[2]);
+				datasource.createDetails(user, params[0], params[2]);
 				datasource.close();
 			}
 			
@@ -305,6 +245,8 @@ public class HomeActivity extends Activity{
 			// TODO Auto-generated method stub
 			//super.onPostExecute(result);
 			dialog.dismiss();
+			
+
 		}
 		
 	}

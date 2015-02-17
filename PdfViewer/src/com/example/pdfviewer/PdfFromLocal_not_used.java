@@ -1,3 +1,7 @@
+/*
+ * Author Vishal Raj
+ * Intern@Groupten
+ */
 package com.example.pdfviewer;
 
 import java.io.File;
@@ -5,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import android.util.Log;
 
-public class PdfFromLocal{
+public class PdfFromLocal_not_used{
 	
 	public List<String> getPath(String dirpath){
 		

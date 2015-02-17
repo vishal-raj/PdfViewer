@@ -1,3 +1,7 @@
+/*
+ * Author Vishal Raj
+ * Intern@Groupten
+ */
 package com.example.pdfviewer;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,16 +17,17 @@ public class PdfDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pdfManager";
  
     // PDF table name
-    public static String TABLE_PDFS = "";
+    public static final String TABLE_PDFS = "pdfs";
  
     // PDF Table Columns names
     //private static final String KEY_ID = "id";
+    public static final String KEY_USER = "userid";
     public static final String KEY_NAME = "pdfname";
-    public static final String KEY_FILE_KEY = "filekey";
+    public static final String KEY_FILE_KEY = "Imagepath";
  
-    public PdfDbHelper(String user_id, Context context) {
+    public PdfDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        TABLE_PDFS = user_id;
+        
         //3rd argument to be passed is CursorFactory instance
     }
  
@@ -30,7 +35,8 @@ public class PdfDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_PDFS_TABLE = "CREATE TABLE " + TABLE_PDFS + "("
-                + KEY_NAME + " TEXT,"
+        		+ KEY_USER + " TEXT,"
+        		+ KEY_NAME + " TEXT,"
                 + KEY_FILE_KEY + " TEXT" + ")";
         db.execSQL(CREATE_PDFS_TABLE);
     }
