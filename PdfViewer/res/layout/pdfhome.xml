@@ -1,15 +1,16 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#E8E8E8" 
-    android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context="com.example.expandablegridview.MainActivity" >
+    
 
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	    android:orientation="vertical">
+    	    
     <TextView android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,21 +19,27 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"/>
-
-    <GridView
-        android:id="@+id/gridviewdevice"
-        android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:numColumns="auto_fit">
-    </GridView>
-	
-	<View
+	    
+    <com.example.pdfviewer.CustomGridview
+         android:id="@+id/griddevice"
+    	 android:layout_width="wrap_content"
+    	 android:layout_height="wrap_content"
+    	 android:gravity="center"
+    	 android:horizontalSpacing="2dp"
+    	 android:isScrollContainer="false"
+    	 android:numColumns="2"
+    	 android:stretchMode="columnWidth"
+    	 android:verticalSpacing="20dp" 
+         />
+    
+    <View
     android:layout_width="fill_parent"
     android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-	
-	
-	<TextView android:layout_marginTop="10dp"
+    android:background="@android:color/darker_gray"
+    android:id="@+id/view"
+    />
+    
+    <TextView android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CLOUD"
@@ -40,12 +47,19 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginLeft="20dp"/>
-	
-	<GridView 
-    	android:id="@+id/gridviewcloud"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	android:numColumns="auto_fit"
-   />
-	
-</LinearLayout>
+    
+	<com.example.pdfviewer.CustomGridview
+	    android:id="@+id/gridcloud"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:gravity="center"
+	    android:horizontalSpacing="2dp"
+	    android:isScrollContainer="false"
+	    android:numColumns="2"
+	    android:stretchMode="columnWidth"
+	    android:verticalSpacing="20dp" />
+
+	</LinearLayout>
+   
+	</ScrollView>
+

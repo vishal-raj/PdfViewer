@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circular="http://schemas.android.com/apk/res/com.example.pdfviewer"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
     android:layout_gravity="center"
->
-    <ImageView 
-	        android:id="@+id/pdf_icon"
-	        android:layout_width="match_parent"
-        	android:layout_height="130dp"
-        	android:padding="10dp"
-        	android:background="@drawable/icon_back"
-	        
-	        />
-    <View
-    android:layout_width="fill_parent"
-    android:layout_height="1dp"
-    android:background="@android:color/darker_gray"/>
-            
-	<TextView 
-			android:id="@+id/pdf_name"
-			android:layout_width="fill_parent"
-        	android:layout_height="wrap_content"
-        	android:textSize="12sp"
-        	android:gravity="left"
-        	android:textStyle="bold"
-        	android:text="Learn Java in 21 days"
-		    android:background="@drawable/oncloud"	        
-		    />
-	
+    android:orientation="vertical"
+    android:padding="10dp" >
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/pdf_icon_cloud"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@drawable/icon_back"
+        android:padding="10dp" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" 
+        android:layout_below="@+id/pdf_icon_cloud"/>
+
+    <TextView
+        android:id="@+id/pdf_name_cloud"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/pdf_icon_cloud"
+        
+        android:background="@drawable/oncloud"
+        android:gravity="left"
+        android:text="Learn Java in 21 days"
+        android:textSize="12sp"
+        android:textStyle="bold" 
+        android:layout_below="@+id/view1"
+        />
+
+    <com.example.pdfviewer.CircularProgressBar
+        android:id="@+id/circularprogressbar2"
+        style="@style/Widget.ProgressBar.Holo.CircularProgressBar"
+        android:layout_width="110dip"
+        android:layout_height="110dip"
+        android:layout_above="@+id/pdf_name_cloud"
+        android:layout_centerHorizontal="true"
+        circular:subtitle="subtitle"
+        circular:title="Title" 
+        android:visibility="gone"/>
+
+</RelativeLayout>

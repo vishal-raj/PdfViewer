@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"  
+    xmlns:tools="http://schemas.android.com/tools"  
+    android:layout_width="fill_parent"  
+    android:layout_height="wrap_content"   
+    android:layout_alignParentLeft="true"   
+    android:layout_marginLeft="10dp"  
+    android:layout_marginTop="10dp" >  
+   
+       <ProgressBar  
+         style="@android:style/Widget.ProgressBar.Large"  
+         android:layout_width="wrap_content"  
+         android:layout_height="wrap_content"  
+         android:layout_centerInParent="true"  
+         android:background="@android:color/background_dark" />  
+   
+       <TextView  
+         android:id="@+id/tv_progress_circle"  
+         android:layout_width="wrap_content"  
+         android:layout_height="wrap_content"  
+         android:layout_centerInParent="true"  
+         android:background="@android:color/transparent"  
+         android:gravity="center"  
+         android:textColor="@android:color/white" />  
+</RelativeLayout>  
