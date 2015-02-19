@@ -4,26 +4,46 @@
  */
 package com.example.pdfviewer;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import com.artifex.mupdflib.MuPDFActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 
 public class HomeActivity extends Activity{
@@ -117,14 +137,38 @@ public class HomeActivity extends Activity{
 					
 					pdfname=aList.get(position).get("pdf_name").toString();
 					
-					//Log.d("name",pdfname);
-					//Toast.makeText(getBaseContext(), aList.get(position).get("pdf_name").toString(), Toast.LENGTH_LONG).show();
-
 					//Open Pdfrender Activity to render the pdf file
-					String pdfpath = getFilesDir().getAbsolutePath()+"/pdf/"+pdfname+".pdf";
-					Intent i = new Intent(HomeActivity.this, PdfRenderActivity.class);
-					i.putExtra("pdf_path", pdfpath);
-					startActivity(i);
+					String s = getFilesDir().getAbsolutePath().toString()+ "/" +user_id+"/pdf/" + pdfname +".pdf";
+					
+					//String s=Environment.getExternalStorageDirectory().getAbsolutePath().toString()+"/Download/angularjs.pdf";
+					Log.d("parh", s);
+					File pdffile = new File(s);
+					if(pdffile.exists()){
+						
+						Uri uri = Uri.parse(s);
+
+						Intent intent = new Intent(getBaseContext(), MuPDFActivity.class);
+
+						intent.setAction(Intent.ACTION_VIEW);
+
+						intent.setData(uri);
+
+						//if you need highlight link boxes
+						intent.putExtra("linkhighlight", true);
+
+						//if you don't need device sleep on reading document
+						intent.putExtra("idleenabled", false);
+
+						//document name
+						intent.putExtra("docname", "PDF document file name");
+						
+						startActivity(intent);
+					}
+					else{
+						Toast.makeText(getBaseContext(), "File not found", Toast.LENGTH_LONG).show();
+					}
+					
+					
 					
 				}
 			});
@@ -218,14 +262,14 @@ public class HomeActivity extends Activity{
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
-			//Log.d("p1",params[0]);
-			//Log.d("p1",params[1]);
-			//Log.d("p1",params[2]);
 			
 			Download dpdf = new Download();
 			dpdf.download(params[0], params[1], dirpath);
 			
-			String storePath = dirpath + "/pdf/"+params[0]+".pdf";
+			String pdfname= params[0];
+			pdfname = pdfname.replace(":", "");
+			
+			String storePath = dirpath + "/pdf/"+pdfname+".pdf";
 			File pdfFile = new File(storePath);
 			
 			//if pdf file is downloaded successfully then creating a new row in User Table
@@ -233,7 +277,7 @@ public class HomeActivity extends Activity{
 				String user = user_id.split("\\@")[0];
 				datasource = new PdfDetailsSource(getBaseContext());
 			    datasource.open();
-				datasource.createDetails(user, params[0], params[2]);
+				datasource.createDetails(user, pdfname, params[2]);
 				datasource.close();
 			}
 			

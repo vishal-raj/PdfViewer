@@ -36,6 +36,7 @@ public class Download {
 		}
 		
 		try{
+			filename = filename.replace(":", "");
 			String storePath = dirpath + "/"+filename+".pdf";
 			//Log.d("path", storePath);
 			File pdfFile = new File(storePath);

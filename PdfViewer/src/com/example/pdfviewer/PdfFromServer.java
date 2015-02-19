@@ -185,6 +185,7 @@ public class PdfFromServer {
 			pdfdir.mkdir();
 			//Log.d("pdfdir", "Directory Created");
 		}
+		filename = filename.replace(":", "");
 		pdfpath = pdfpath + "/" + filename + ".pdf";
 		//Log.d("pdfpath",pdfpath);
 		File pdffile = new File(pdfpath);
